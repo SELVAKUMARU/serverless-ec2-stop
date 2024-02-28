@@ -1,6 +1,6 @@
 # serverless-ec2-stop
 
-we have a script to stop ec2 instances using python script based on tags.
+We have a script to stop ec2 instances using python script based on tags.
 
 Prerequisites
 
