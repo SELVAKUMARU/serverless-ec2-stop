@@ -1,0 +1,39 @@
+service:
+  name: linux-ec2-stop
+
+provider:
+  name: aws
+  runtime: python3.8
+  region: ap-south-1
+  stage: ${opt:stage, 'dev'}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents 
+      Resource: "arn:aws:logs:*:*:*"
+    - Effect: Allow
+      Action:
+        - ec2:Start*
+        - ec2:Stop*
+        - ec2:DescribeInstances
+        - ec2:DescribeTags
+        - ec2:DescribeInstanceTypes
+        - ec2:DescribeInstanceStatus
+      Resource: "*"   
+
+functions:
+  stopEc2Instances:
+    handler: handler.lambda_handler
+    name: linux-ec2-stop
+    description: Lambda function to stop windows machine 
+    events:
+      - schedule: cron(0 21 ? * MON-FRI *)
+      
+resources:
+  Resources:
+    IamRoleLambdaExecution:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: linux-ec2-stop   
