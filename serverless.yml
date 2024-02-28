@@ -1,5 +1,4 @@
-service:
-  name: linux-ec2-stop
+service: linux-ec2-stop
 
 provider:
   name: aws
