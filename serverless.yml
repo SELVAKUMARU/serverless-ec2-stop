@@ -28,7 +28,7 @@ functions:
     name: linux-ec2-stop
     description: Lambda function to stop windows machine 
     events:
-      - schedule: cron(0 21 ? * MON-FRI *)
+      - schedule: cron(45 05 ? * MON-FRI *)
       
 resources:
   Resources:
